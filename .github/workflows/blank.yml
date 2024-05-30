@@ -1,0 +1,32 @@
+name: 3. Deployement
+run-name: ${{ github.actor }} is running the ${{ github.workflow }}
+on:
+  - workflow_dispatch
+
+
+jobs:
+  Dev_Depployment:
+    runs-on: ubuntu-latest
+    environment: Dev
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Print Dev Variables
+        run: echo "The value of CHECK_ENVIRONMENT is ${{ vars.CHECK_ENVIRONMENT }}"
+
+   UAT_Depployment:
+    runs-on: ubuntu-latest
+    environment: UAT
+    needs: Dev_Depployment
+    steps:
+      - name: Print UAT Variables
+        run: echo "The value of CHECK_ENVIRONMENT is ${{ vars.CHECK_ENVIRONMENT }}"
+
+   Prod_Depployment:
+    runs-on: ubuntu-latest
+    environment: PROD
+    needs: UAT_Depployment
+    steps:
+      - name: Print PROD Variables
+        run: echo "The value of CHECK_ENVIRONMENT is ${{ vars.CHECK_ENVIRONMENT }}"
