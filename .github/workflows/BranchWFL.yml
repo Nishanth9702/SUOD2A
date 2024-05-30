@@ -6,9 +6,15 @@ on:
       - main
 
 jobs:
+  Initial_Job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Initial Step
+        run: echo "Starting the branch propagation workflow"
+
   Propagate_Dev_Branch:
     runs-on: ubuntu-latest
-    needs: Prod_Deployment
+    needs: Initial_Job
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
