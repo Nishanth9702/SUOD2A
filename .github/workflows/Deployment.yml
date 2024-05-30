@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Print Dev Variables
-        run: echo "The value of CHECK_ENVIRONMENT is ${{ vars.CHECK_ENVIRONMENT }}"
+        run: echo "The Dev environment variable is ${{ vars.HOSTNAME }}"
 
    UAT_Depployment:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
     needs: Dev_Depployment
     steps:
       - name: Print UAT Variables
-        run: echo "The value of CHECK_ENVIRONMENT is ${{ vars.CHECK_ENVIRONMENT }}"
+        run: echo "The UAT environment variable is ${{ vars.HOSTNAME }}"
 
    Prod_Depployment:
     runs-on: ubuntu-latest
@@ -29,4 +29,4 @@ jobs:
     needs: UAT_Depployment
     steps:
       - name: Print PROD Variables
-        run: echo "The value of CHECK_ENVIRONMENT is ${{ vars.CHECK_ENVIRONMENT }}"
+        run: echo "The Prod environment variable is ${{ vars.HOSTNAME }}"
